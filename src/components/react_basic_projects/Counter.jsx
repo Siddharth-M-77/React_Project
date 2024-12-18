@@ -42,10 +42,10 @@ const Counter = () => {
         <div className='w-screen h-screen flex items-center justify-center bg-white flex-col '>
             <h1 className='text-4xl mb-4'>Count:{count}</h1>
             <div className='flex items-center justify-center gap-3 p-4'>
-                <button onClick={countIncrement} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Increment</button>
-                <button onClick={countDecrement} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Decrement</button>
-                <button onClick={undo} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Undo</button>
-                <button onClick={redo} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Redo</button>
+                <button onClick={countIncrement} className='w-32 px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Increment</button>
+                <button onClick={countDecrement} className='w-32 px-4 py-2 text-white hover:bg-blue-700 bg-indigo-600 rounded-lg border-none shadow-lg '>Decrement</button>
+                <button onClick={undo} className='w-32 px-4 py-2 text-white hover:bg-blue-700 bg-teal-600 rounded-lg border-none shadow-lg '>Undo</button>
+                <button onClick={redo} className='w-32 px-4 py-2 text-white hover:bg-blue-700 bg-gray-800 rounded-lg border-none shadow-lg '>Redo</button>
             </div>
         </div>
     )
