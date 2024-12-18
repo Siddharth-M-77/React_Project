@@ -5,9 +5,6 @@ const StopWatch = () => {
     // const intervalRef = useRef(null)  //to store interval id
     const [intervalID, setIntervalID] = useState(null)
 
-
-
-
     const startHandler = () => {
         if (intervalID) return
         const id = setInterval(() => {
