@@ -7,13 +7,35 @@ const Counter = () => {
 
     const countIncrement = () => {
         if (count >= 0) {
-            const newCount = setCount(count + 1)
-            
+            const newCount = count + 1
+            const updateHistory = history.slice(0, currentIndex + 1);
+            console.log(updateHistory)
+            setHistory([...updateHistory, newCount])
+            setCurrentIndex(currentIndex + 1)
+            setCount(newCount)
         }
     }
     const countDecrement = () => {
         if (count > 0) {
-            setCount((prev) => prev - 1)
+            const newCount = count - 1
+            const updateHistory = history.slice(0, currentIndex + 1);
+            setHistory([...updateHistory, newCount])
+            setCurrentIndex(currentIndex + 1)
+            setCount(newCount)
+        }
+    }
+    const undo = () => {
+        if (currentIndex > 0) {
+            const newIndex = currentIndex - 1
+            setCurrentIndex(newIndex)
+            setCount(history[newIndex])
+        }
+    }
+    const redo = () => {
+        if (currentIndex < history.length - 1) {
+            const newIndex = currentIndex + 1
+            setCurrentIndex(newIndex)
+            setCount(history[newIndex])
         }
     }
     return (
@@ -22,8 +44,8 @@ const Counter = () => {
             <div className='flex items-center justify-center gap-3 p-4'>
                 <button onClick={countIncrement} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Increment</button>
                 <button onClick={countDecrement} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Decrement</button>
-                <button className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Undo</button>
-                <button className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Redo</button>
+                <button onClick={undo} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Undo</button>
+                <button onClick={redo} className='px-4 py-2 text-white hover:bg-blue-700 bg-blue-600 rounded-lg border-none shadow-lg '>Redo</button>
             </div>
         </div>
     )
