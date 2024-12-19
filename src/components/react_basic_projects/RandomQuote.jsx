@@ -88,7 +88,7 @@ const RandomQuote = () => {
         "A winner is a dreamer who never gives up. – Nelson Mandela",
         "Don’t let small minds convince you that your dreams are too big. – Unknown"
     ];
-    
+
     const generateQuotes = () => {
         const radom = Math.floor(Math.random() * quotes.length)
         setQuote(quotes[radom])
