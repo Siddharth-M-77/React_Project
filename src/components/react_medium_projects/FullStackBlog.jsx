@@ -6,13 +6,14 @@ const FullStackBlog = () => {
         title: '',
         content: ''
     });
+    const [loading, setLoading] = useState(false)
     const [blogs, setBlogs] = useState([]);
     const [editingBlogId, setEditingBlogId] = useState(null);
 
     const fetchBlog = async () => {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         const data = await response.json();
-        setBlogs(data);
+        setBlogs(data.slice(0,10));
     };
 
     // Run fetchBlog only once after the initial render
@@ -33,7 +34,8 @@ const FullStackBlog = () => {
 
         const response = await axios.post('https://jsonplaceholder.typicode.com/posts', newBlog);
 
-        setBlogs([response.data, ...blogs]);
+        setBlogs([...blogs, response.data]);
+
 
         setFormData({ title: '', content: '' });
     };
@@ -44,7 +46,6 @@ const FullStackBlog = () => {
     };
 
     const editBlog = (blog) => {
-        console.log(blog.id);
         setEditingBlogId(blog.id);
         setFormData({ title: blog.title, content: blog.body });
     }
