@@ -1,22 +1,40 @@
-import React from 'react'
-import Counter from './components/react_basic_projects/Counter'
-import ExpenseTracker from './components/react_basic_projects/ExpenseTracker'
-import StopWatch from './components/react_basic_projects/StopWatch'
-import RandomQuote from './components/react_basic_projects/RandomQuote'
-import SearchFunctnality from './components/react_basic_projects/SearchFunctnality'
-import FullStackBlog from './components/react_medium_projects/FullStackBlog'
+import React, { useState } from "react";
+import Column from "./components/react_medium_projects/Column";
 
 const App = () => {
-  return (
-    <>
-      {/* <Counter/> */}
-      {/* <ExpenseTracker/> */}
-      {/* <StopWatch/> */}
-      {/* <RandomQuote/> */}
-      {/* <SearchFunctnality/> */}
-      <FullStackBlog/>
-    </>
-  )
-}
+  const [tasks, setTasks] = useState({
+    todo: [{ id: 1, title: "Learn React" }],
+    inProgress: [{ id: 2, title: "Build a Project" }],
+    done: [{ id: 3, title: "Apply for Jobs" }],
+  });
 
-export default App
+  const handleDragEnd = (task, source, destination) => {
+    if (!destination) return;
+
+    const sourceTasks = [...tasks[source]];
+    const destTasks = [...tasks[destination]];
+
+    const [removedTask] = sourceTasks.splice(
+      sourceTasks.findIndex((t) => t.id === task.id),
+      1
+    );
+    destTasks.push(removedTask);
+
+    setTasks({ ...tasks, [source]: sourceTasks, [destination]: destTasks });
+  };
+
+  return (
+    <div className="flex gap-4 p-4">
+      {Object.keys(tasks).map((status) => (
+        <Column
+          key={status}
+          title={status}
+          tasks={tasks[status]}
+          handleDragEnd={handleDragEnd}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default App;
